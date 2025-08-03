@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+    <link rel="stylesheet" href="static/login.css">
+    <title>Login Page</title>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Left Container -->
+        <div class="left-container">
+            <div class="header">
+                <div class="logo-container">
+                    <img src="static/images/sad.png" alt="Logo">
+                    <h1>VISTA</h1>
+                </div>
+            </div>
+            <div class="form-content">
+                <h2>Sign in</h2>
+                <p>Please enter your details.</p>
+
+                <!-- Display Error Message if Login Fails -->
+                {% if error %}
+                    <p class="error-message" style="color: red;">{{ error }}</p>
+                {% endif %}
+
+                <form method="POST" action="{{ url_for('handle_login') }}">
+                    <input type="email" name="email" placeholder="Email address" autocomplete="email" required aria-label="Email Address">
+                    <input type="password" name="password" placeholder="Password" autocomplete="current-password" required aria-label="Password">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+
+                <p class="forgot-password"><a href="#">Forgot password?</a></p>
+            </div>
+        </div>
+
+        <!-- Right Container -->
+        <div class="right-container">
+            <img src="/static/images/illustration.png" alt="Illustration">
+        </div>
+    </div>
+</body>
+</html>

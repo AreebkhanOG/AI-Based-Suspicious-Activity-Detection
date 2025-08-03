@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vista-Admin</title>
+    <link rel="stylesheet" href="static/admin.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="admin-info">
+            <h2>Admin</h2>
+        </div>
+        
+        <ul>
+            <li><a href="{{ url_for('admin_dashboard') }}"><img src="/static/images/dashboard.png" alt="Dashboard Icon"></a></li>
+            <li><a href="#"><img src="/static/images/setting.png" alt="Settings Icon"></a></li>
+            <li><a href="{{ url_for('logout') }}"><img src="/static/images/logout.png" alt="Logout Icon"></a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h2>Users</h2>
+            <button class="new-user-btn" onclick="openPopup()">+</button>
+        </div>
+
+        <!-- User List Table -->
+        <div class="user-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.password }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Add User Popup -->
+        <div class="popup" id="popup">
+            <div class="popup-content">
+                <h3>Add New User</h3>
+
+                <form id="addUserForm">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" placeholder="Enter username">
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter email">
+                    
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter password">
+                    
+                    <div class="popup-buttons">
+                        <button type="submit">Submit</button>
+                        <button type="button" onclick="closePopup()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openPopup() {
+            document.getElementById("popup").style.display = "flex";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        document.getElementById("addUserForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent page reload
+
+            let formData = new FormData(this);
+
+            fetch("/add_user", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data); // Show success or error message
+                location.reload(); // Reload page to update user list
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    </script>
+
+</body>
+</html>

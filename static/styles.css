@@ -1,0 +1,350 @@
+/* General Styles */
+body {
+    font-family: Open Sans, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+}
+
+/* Container */
+.container {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    background-color: #14141F;
+    
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background-color: #14141F;
+    color: #549DC5;
+    width: 50px;
+    padding-top: 10px;
+    padding-right: 5px;
+    flex-shrink: 0;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 100px;
+    font-size: 10px;
+    padding-left: 25px;
+    padding-top: 17px;
+}
+
+.logo-container img {
+    width: 30px;
+    height: 30px;
+    margin-right: 0px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 0px 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px;
+    border-radius: 20px;
+    transition: background 0.1s;
+    margin-right: 5px;
+    
+}
+
+.sidebar ul li a img {
+    width: 25px;
+    height: 25px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    filter: invert(100%);
+    transition: filter 0.3s ease-in-out;
+}
+
+.sidebar ul li a:hover img {
+    filter: brightness(0) saturate(100%) invert(23%) sepia(99%) saturate(1500%) hue-rotate(200deg) brightness(90%) contrast(105%);
+}
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    padding-left: 25px;
+    padding-right: 20px;
+}
+
+.header {
+    background-color: #14141F;
+    color: white;
+    padding-left: 6px;
+    padding-top: 5px;    
+    border-radius: 5px;
+    margin-bottom: 30px;
+    font-size: 13px;
+}
+
+/* Grid Layout */
+.grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Left (large video) and Right (controls and logs) */
+    grid-template-rows: auto auto;
+    grid-gap: 15px;
+}
+
+/* Live Video */
+.live-video {
+    background-color: #1E1E2E;
+    border-radius: 10px 30px 30px 30px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    height: 840px;
+    padding: 0px;
+}
+
+.live-video img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Right Column */
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Active Webcam Container */
+.webcam-container {
+    background-color: #1E1E2E;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+    padding: 15px;
+    color: #fff;
+    text-align: Left;
+    height: 380px;
+    
+
+}
+
+
+.main-heading {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: none;
+    margin-bottom: 10px;
+    padding-left: 5px;
+}
+
+.university-heading {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin: 5px 5px 15px 5px;
+    padding-top: 10px;
+
+}
+
+.university-section {
+    margin-top: 10px;
+    font-size: 10px;
+
+}
+
+.sub-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0px;
+    margin: 0px 0px 15px 5px;
+}
+
+.sub-heading {
+    font-size: 13px;
+    color: #a6a6a6; /* Light black color */
+    margin: 0;
+}
+
+.btn {
+    background-color: #151515;
+    color: #fff;
+    border: 1px solid #555;
+    padding: 5px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.camera-buttons button:first-child:hover {
+    background: #48A860;
+    color: white;
+}
+
+.camera-buttons button:last-child:hover {
+    background: #e74c3c;
+    color: white;
+}
+
+
+/* Detection Logs Container */
+.logs-container {
+    background: #1E1E2E;
+    padding: 15px;
+    border-radius: 30px;
+    margin-top: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    color: white;
+    width: 610px;
+    height: 380px;
+}
+
+/* Title Style */
+.logs-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Log List */
+.log-list {
+    list-style: none;
+    padding: 0;
+}
+
+/* Individual Log Item */
+.log-item {
+    display: flex;
+    align-items: center;
+    background: #25253D;
+    padding: 20px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    transition: background 0.3s;
+    justify-content: flex-start; /* Align content to the left */
+}
+
+.log-item:hover {
+    background: #303052;
+}
+
+/* Detection Icon */
+.log-icon img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    filter: invert(100%); /* Inverts the color to white */
+}
+
+/* Detection Type & Timestamp */
+.log-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left; /* Align text to the left */
+}
+
+.log-type {
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+}
+
+.log-time {
+    font-size: 12px;
+    color: #B0B0B0;
+}
+
+/* Status ("Yes") */
+.log-status {
+    font-weight: bold;
+    color: #4CAF50; /* Green for Yes */
+    font-size: 14px;
+    margin-left: auto; /* Push "Yes" to the far right */
+}
+
+/* No Logs Message */
+.no-logs {
+    color: #B0B0B0;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+}
+
+
+
+
+
+
+
+
+/* Alert Pop-up Styles */
+.alert-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.alert-content {
+    background: #ff4d4d;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.5);
+    animation: pulse 1.5s infinite;
+    width: 300px;
+}
+
+.alert-content h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.alert-content p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.alert-content button {
+    background: white;
+    color: #ff4d4d;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.alert-content button:hover {
+    background: #ff1a1a;
+    color: white;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}

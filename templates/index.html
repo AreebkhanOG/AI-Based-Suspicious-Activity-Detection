@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>VISTA Detection</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script>
+
+function checkAlert() {
+    fetch('/alert_status')
+        .then(response => response.json())
+        .then(data => {
+            if (data.is_alert_active && data.anomaly !== "None" && data.anomaly !== null) {
+                document.getElementById("alert-popup").style.display = "flex";
+                document.getElementById("alert-message").innerText = "Anomaly Detected: " + data.anomaly;
+            } else {
+                document.getElementById("alert-popup").style.display = "none";
+            }
+        });
+}
+
+
+        function acknowledgeAlert() {
+            fetch('/acknowledge_alert', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("alert-popup").style.display = "none";
+                });
+        }
+
+        setInterval(checkAlert, 5000); // Check for alerts every 5 seconds
+    </script>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="/static/images/sad.png" alt="Logo">          
+            </div>
+            <ul>
+                <li><a href="{{ url_for('index') }}"><img src="/static/images/dashboard.png" alt="Dashboard Icon"></a></li>
+                <li><a href="/logs"><img src="/static/images/logs.png" alt="Logs Icon"></a></li>
+                <li><a href="#"><img src="/static/images/report.png" alt="Reports Icon"></a></li>
+                <li><a href="#"><img src="/static/images/setting.png" alt="Settings Icon"></a></li>
+                <li><a href="{{ url_for('logout') }}"><img src="/static/images/logout.png" alt="Logout Icon"></a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <h1>Welcome, {{ username }}!</h1>
+            </header>
+            <div class="grid">
+                <section class="live-video">
+                    <img src="/video_feed" alt="Live Video Feed">
+                </section>
+
+                <div class="right-column">
+                    <section class="webcam-container">
+                        <h1 class="main-heading">Cameras</h1>
+                        <div class="university-section">
+                            <h2 class="university-heading">Nazeer Hussain University</h2>
+                            <div class="sub-section">
+                                <p class="sub-heading">Main Gate</p>
+                                <div class="camera-buttons">
+                                    <button class="btn" onclick="location.href='/start'">Camera On</button>
+                                    <button class="btn" onclick="location.href='/stop'">Camera Off</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="logs-container">
+                        <h2 class="logs-title">Detection Logs</h2>
+                        <ul class="log-list">
+                            {% if logs %}
+                                {% for log in logs %}
+                                <li class="log-item">
+                                    <div class="log-icon">
+                                        <img src="/static/images/detection.png" alt="Detection Icon">
+                                    </div>
+                                    <div class="log-info">
+                                        <span class="log-type">{{ log[2] }}</span>
+                                        <span class="log-time">{{ log[0] }}</span>
+                                    </div>
+                                    <div class="log-status">
+                                        <span class="detected">Yes</span>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            {% else %}
+                                <p class="no-logs">No recent detections.</p>
+                            {% endif %}
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="alert-popup" class="alert-popup" style="display: none; position: fixed;">
+        <div class="alert-content">
+            <h1>ALERT</h1>
+            <p id="alert-message">Anomaly Detected: Fire/Weapon</p>
+            <p>Location: Main Gate</p>
+            <button onclick="acknowledgeAlert()">Acknowledge</button>
+        </div>
+    </div>
+</body>
+</html>

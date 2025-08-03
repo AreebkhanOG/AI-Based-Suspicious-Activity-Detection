@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>VISTA Logs</title>
+    <link rel="stylesheet" href="/static/logs.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="/static/images/sad.png" alt="Logo">
+            </div>
+            <ul>
+                <li><a href="{{ url_for('index') }}"><img src="/static/images/dashboard.png" alt="Dashboard Icon"></a></li>
+                <li><a href="{{ url_for('view_logs') }}"><img src="/static/images/logs.png" alt="Logs Icon"></a></li>
+                <li><a href="#"><img src="/static/images/report.png" alt="Reports Icon"></a></li>
+                <li><a href="#"><img src="/static/images/setting.png" alt="Settings Icon"></a></li>
+                <li><a href="{{ url_for('logout') }}"><img src="/static/images/logout.png" alt="Logout Icon"></a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <h1>Detection Logs for {{ session['username'] }}</h1>
+            </header>
+
+            <section>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>User</th>
+                            <th>Timestamp</th>
+                            <th>Detection</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detection-logs">
+                        {% for log in logs %}
+                        <tr>
+                            <td>{{ log[0] }}</td>
+                            <td>{{ log[1] }}</td>
+                            <td>{{ log[2] }}</td>
+                            <td>{{ log[3] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <button onclick="location.href='/'">Back to Dashboard</button>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
